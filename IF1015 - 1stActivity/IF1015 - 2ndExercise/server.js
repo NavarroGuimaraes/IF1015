@@ -9,19 +9,28 @@ const inputs = readLine.createInterface({
 
 const connectedClients = []
 
-const handleConnection = socket => {
+const sendMessages = (senderPort, message) => {
 
-    console.log('O cliente foi conectado.')
+    const clientsToSendMessage = connectedClients.filter(socket => socket.remotePort != senderPort);
+    clientsToSendMessage.forEach(
+        socket => socket.write(message)
+    );
+
+}
+
+const handleConnection = socket => {
 
     socket.on('data', data => {
         
         const str = data.toString();
         if (str.toLowerCase() == 'end') { //apenas a comparação deve ser em lower case para exibir a mensagem conforme foi digitada
-            socket.write("você foi desconectado. Pressione CTRL + C para sair do cliente.")
-            socket.end()
+            socket.write("você foi desconectado. Pressione CTRL + C para sair do cliente.");
+            socket.end();
         }
-        console.log(`Mensagem recebida do Cliente: ${str}`)
 
+        console.log(str);
+        sendMessages(socket.remotePort, str);
+        
     })
 
 }
@@ -29,14 +38,14 @@ const handleConnection = socket => {
 const server = net.createServer(handleConnection)
 server.listen(4242, '127.0.0.1')
 
-server.on('connection', (client) => {
+server.on('connection', (socket) => {
+
+    socket.write("Olá, bem vinto ao chat na borda do espaço tempo. Aqui, nada tem passado, presente ou futuro.")
     
-    client.write("Oi Cliente! Bem vindo ao servidor. Mas nao te servirei dor, pode ficar tranquilo.")
-    
-    connectedClients.push(client)
+    connectedClients.push(socket);
     
     inputs.addListener('line', line => {
-        client.write(line)
+        socket.write(line)
     })
 
 })
