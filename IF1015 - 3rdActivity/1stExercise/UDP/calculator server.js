@@ -23,7 +23,9 @@ const isNotAValidOperator = (str) => {
 
 const sendMessage = (message, port) => {
 
-    server.send(message, port, 'localhost' ,(error) => {
+    let data = Buffer.from(message);    
+
+    server.send(data, port, 'localhost' ,(error) => {
 
         if(error) {
 
