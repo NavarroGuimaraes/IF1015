@@ -1,0 +1,20 @@
+{
+  "name": "HTTP_RESTFul_API",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server",
+    "test": "echo \"Error: no test specified dumbass\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "config": "^3.3.7",
+    "express": "^4.18.1",
+    "express-hateoas-links": "^1.3.1",
+    "jsonfile": "^6.1.0"
+  }
+}
