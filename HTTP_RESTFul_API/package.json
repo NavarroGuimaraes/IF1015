@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server",
+    "client": "nodemon ./client/client.js",
     "test": "echo \"Error: no test specified dumbass\" && exit 1"
   },
   "keywords": [],
