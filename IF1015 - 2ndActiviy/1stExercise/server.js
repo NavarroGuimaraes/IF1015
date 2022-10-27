@@ -1,7 +1,6 @@
 const udp = require('dgram');
 const server = udp.createSocket('udp4');
 
-// Só os contatinhos hahaha
 const possibleListeners = [];
 
 const removeListener = (port) => {
